@@ -10,6 +10,11 @@ enum Opcode {
     PUSH, POP // Data operation opcodes
 };
 
+struct MachineWord {
+    Opcode command;
+    int argument;
+};
+
 extern const std::string OPCODES_MNEMONIC[];
 
 #endif
