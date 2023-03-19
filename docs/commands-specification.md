@@ -38,7 +38,7 @@ Math operation commands
  - mul - takes 2 numbers from stack, and push result of mul of this 2 numbers
  - cmp - takes 2 numbers from stack, and push result of comparing of this 2 numbers
 
-*Note: numbers order declared by exit order from stack*
+*Note: numbers order defined by exit order from stack*
 
 *For example:*
 ~~~
