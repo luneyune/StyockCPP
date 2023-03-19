@@ -14,6 +14,11 @@ Input::~Input()
     fileStream.close();
 }
 
+bool Input::is_readable()
+{
+    return fileStream.good();
+}
+
 void Input::readString(char *buffer, size_t buffsize)
 {
     fileStream.getline(buffer, buffsize);

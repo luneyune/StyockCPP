@@ -1,0 +1,5 @@
+etc/*
+obj/app/*
+bin/*
+
+!obj/app/.keep
