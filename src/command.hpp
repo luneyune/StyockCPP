@@ -1,3 +1,13 @@
+#ifndef STYOCKCPP_COMPILER_SRC_INPUT_HPP_
+#define STYOCKCPP_COMPILER_SRC_INPUT_HPP_
+
+class iCommand;
+
+class iCompiler
+{
+public:
+    virtual iCommand compile(char *buf, size_t buffsize);
+};
 
 class iCommand
 {
@@ -8,3 +18,7 @@ public:
 
     virtual void execute() = 0;
 }
+
+
+
+#endif
