@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Werror -lcurses -I src
+CFLAGS = -Wall -Werror -I src
 CC = g++
 
 Executable_dir = bin
@@ -12,15 +12,13 @@ all: $(Executable_dir)/main
 .PHONY: all run format test
 
 #Executables
-$(Executable_dir)/main: $(Objects_app_dir)/main.o $(Objects_app_dir)/input.o $(Objects_app_dir)/stack.o
+$(Executable_dir)/main: $(Objects_app_dir)/main.o $(Objects_app_dir)/input.o
 	$(CC) $^ $(CFLAGS) -o $@
 
 #App objects
 $(Objects_app_dir)/main.o: $(Sources_app_dir)/main.cpp $(Sources_app_dir)/input.hpp
 	$(CC) $< $(CFLAGS) -c -o $@
 $(Objects_app_dir)/input.o: $(Sources_app_dir)/input.cpp $(Sources_app_dir)/input.hpp
-	$(CC) $< $(CFLAGS) -c -o $@
-$(Objects_app_dir)/stack.o: $(Sources_app_dir)/stack.cpp $(Sources_app_dir)/stack.hpp
 	$(CC) $< $(CFLAGS) -c -o $@
 
 

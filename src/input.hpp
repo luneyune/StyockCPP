@@ -18,7 +18,7 @@ public:
     bool is_readable();
 
     static Input& getInstance(const char* filename);
-    void readString(char *buffer, size_t buffsize);
+    std::string readString();
 
 };
 

@@ -19,8 +19,11 @@ bool Input::is_readable()
     return fileStream.good();
 }
 
-void Input::readString(char *buffer, size_t buffsize)
+std::string Input::readString()
 {
-    fileStream.getline(buffer, buffsize);
+    char buffer[120];
+    fileStream.getline(buffer, 120);
+    std::string line(buffer);
+    return line;
 }
 
