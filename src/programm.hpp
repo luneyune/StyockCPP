@@ -3,6 +3,8 @@
 
 #include <stack>
 #include <vector>
+#include <string>
+
 #include "command.hpp"
 
 enum State {
@@ -13,12 +15,10 @@ enum State {
 class Programm
 {
 private:
-    std::stack<int, std::vector<int>> data;
+    spp_stack data;
     std::vector<iCommand> programm;
     Programm() {};
     Programm(Programm&) {};
-
-    iCommand compile(char *string, size_t buffsize);
 public:
     Programm &getInstance();
     State executeNextCommand();
