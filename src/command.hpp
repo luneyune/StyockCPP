@@ -19,6 +19,8 @@ public:
     virtual void execute(spp_stack &stack) = 0;
 };
 
+
+namespace command {
 // Command Classes
 
 // Output
@@ -65,6 +67,53 @@ class reads : public iCommand
 public:
     reads(std::vector<int> args = {}) : iCommand(args) {}
     void execute(spp_stack &stack) override;
+};
+
+
+// Math
+class add : public iCommand
+{
+public:
+    add(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(spp_stack &stack) override;
+};
+
+class sub : public iCommand
+{
+public:
+    sub(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(spp_stack &stack) override;
+};
+
+class div : public iCommand
+{
+public:
+    div(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(spp_stack &stack) override;
+};
+
+class mod : public iCommand
+{
+public:
+    mod(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(spp_stack &stack) override;
+};
+
+class mul : public iCommand
+{
+public:
+    mul(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(spp_stack &stack) override;
+};
+
+class cmp : public iCommand
+{
+public:
+    cmp(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(spp_stack &stack) override;
+};
+
+
 };
 
 #endif

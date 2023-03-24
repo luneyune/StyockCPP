@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+namespace command {
 // Output
 void printd::execute(spp_stack &stack)
 {
@@ -59,3 +60,83 @@ void reads::execute(spp_stack &stack)
     }
 }
 
+
+// Math
+
+void add::execute(spp_stack &stack)
+{
+    int a = stack.top();
+    stack.pop();
+
+    int b = stack.top();
+    stack.pop();
+
+    stack.push(b + a);
+}
+
+void sub::execute(spp_stack &stack)
+{
+    int a = stack.top();
+    stack.pop();
+
+    int b = stack.top();
+    stack.pop();
+
+    stack.push(b - a);
+}
+
+void div::execute(spp_stack &stack)
+{
+    int a = stack.top();
+    stack.pop();
+
+    int b = stack.top();
+    stack.pop();
+
+    stack.push(b / a);
+}
+
+void mod::execute(spp_stack &stack)
+{
+    int a = stack.top();
+    stack.pop();
+
+    int b = stack.top();
+    stack.pop();
+
+    stack.push(b % a);
+}
+
+void mul::execute(spp_stack &stack)
+{
+    int a = stack.top();
+    stack.pop();
+
+    int b = stack.top();
+    stack.pop();
+
+    stack.push(b * a);
+}
+
+void cmp::execute(spp_stack &stack)
+{
+    int a = stack.top();
+    stack.pop();
+
+    int b = stack.top();
+    stack.pop();
+
+    if (a > b) {
+        stack.push(-1);
+        return;
+    }
+    if (a < b) {
+        stack.push(1);
+        return;
+    }
+
+    stack.push(0);
+    return;
+}
+
+};

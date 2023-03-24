@@ -38,26 +38,45 @@ spp_command_ptr Compiler::compile(const std::string &command)
 {
     strCommand parsed = parseCommand(command);
     if (parsed.mnemonic == "printd") {
-        return compileRaw<printd>(parsed.args);
+        return compileRaw<command::printd>(parsed.args);
     }
     if (parsed.mnemonic == "printc") {
-        return compileRaw<printc>(parsed.args);
+        return compileRaw<command::printc>(parsed.args);
     }
     if (parsed.mnemonic == "prints") {
-        return compileRaw<prints>(parsed.args);
+        return compileRaw<command::prints>(parsed.args);
     }
 
     if (parsed.mnemonic == "readd") {
-        return compileRaw<readd>(parsed.args);
+        return compileRaw<command::readd>(parsed.args);
     }
     if (parsed.mnemonic == "readc") {
-        return compileRaw<readc>(parsed.args);
+        return compileRaw<command::readc>(parsed.args);
     }
     if (parsed.mnemonic == "reads") {
-        return compileRaw<reads>(parsed.args);
+        return compileRaw<command::reads>(parsed.args);
     }
 
-    return compileRaw<readc>(parsed.args);
+    if (parsed.mnemonic == "add") {
+        return compileRaw<command::add>(parsed.args);
+    }
+    if (parsed.mnemonic == "sub") {
+        return compileRaw<command::sub>(parsed.args);
+    }
+    if (parsed.mnemonic == "div") {
+        return compileRaw<command::div>(parsed.args);
+    }
+    if (parsed.mnemonic == "mod") {
+        return compileRaw<command::mod>(parsed.args);
+    }
+    if (parsed.mnemonic == "mul") {
+        return compileRaw<command::mul>(parsed.args);
+    }
+    if (parsed.mnemonic == "cmp") {
+        return compileRaw<command::cmp>(parsed.args);
+    }
+
+    return compileRaw<command::readc>(parsed.args);
 }
 
 
