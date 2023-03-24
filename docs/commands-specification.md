@@ -24,7 +24,7 @@ Control commands
 
 Data operation commands
 
- - push \<arg\> - pushes number, or string, or list of numbers separated by column. String or list of numbers will be pushed in reverse order
+ - push \<arg\> - pushes number, or string, or list of numbers separated by space. String or list of numbers will be pushed in reverse order
  - pop - remove top element of stack
 
 ---
@@ -38,12 +38,12 @@ Math operation commands
  - mul - takes 2 numbers from stack, and push result of mul of this 2 numbers
  - cmp - takes 2 numbers from stack, and push result of comparing of this 2 numbers
 
-*Note: numbers order defined by exit order from stack*
+*Note: numbers order defined by input order from stack*
 
 *For example:*
 ~~~
-PUSH 5
 PUSH 9
+PUSH 5
 SUB
 PRINTD
 
