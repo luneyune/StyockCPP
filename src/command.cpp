@@ -51,7 +51,8 @@ void readc::execute(spp_stack &stack)
 void reads::execute(spp_stack &stack)
 {
     std::string input;
-    std::cin >> input;
+    std::cin >> std::ws;
+    std::getline(std::cin, input, '\n');
     stack.push('\0');
     for (auto i = input.crbegin(); i != input.crend(); i++) {
         stack.push(static_cast<int>(*i));
