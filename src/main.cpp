@@ -6,17 +6,26 @@
 #include "input.hpp"
 #include "command.hpp"
 #include "compiler.hpp"
+#include "programm.hpp"
 
-int main()
+void pre_compile(const char *filename, Programm &programm)
 {
-    spp_stack data;
-    Input &input = Input::getInstance("etc/test.txt");
+    Input &input = Input::getInstance(filename);
     Compiler &compiler = Compiler::getInstance();
 
     while (input.is_readable())
     {
         std::string command = input.readString();
-        spp_command_ptr to_execute = compiler.compile(command);
-        to_execute->execute(data);
+        spp_command_ptr compiled = compiler.compile(command);
+        programm.programm.insert(programm.programm.cend(), std::move(compiled));
+    }
+}
+
+int main()
+{
+    Programm programm;
+    pre_compile("etc/test.txt", programm);
+    for (auto i = programm.programm.cbegin(); i != programm.programm.cend(); i++) {
+        (*i)->execute(programm);
     }
 }

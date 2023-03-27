@@ -12,16 +12,12 @@ enum State {
     END,
 };
 
-class Programm
+struct Programm
 {
-private:
     spp_stack data;
-    std::vector<iCommand> programm;
-    Programm() {};
-    Programm(Programm&) {};
-public:
-    Programm &getInstance();
-    State executeNextCommand();
+    std::vector<spp_command_ptr> programm = {};
+    size_t current = 0;
+    State state = RUN;
 };
 
 #endif

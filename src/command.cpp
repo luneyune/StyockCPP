@@ -1,141 +1,142 @@
 #include "command.hpp"
+#include "programm.hpp"
 
 #include <iostream>
 
 namespace command {
 // Output
-void printd::execute(spp_stack &stack)
+void printd::execute(Programm &programm)
 {
-    int d = stack.top();
-    stack.pop();
+    int d = programm.data.top();
+    programm.data.pop();
 
     std::cout << d << std::endl;
 }
 
-void printc::execute(spp_stack &stack)
+void printc::execute(Programm &programm)
 {
-    int d = stack.top();
-    stack.pop();
+    int d = programm.data.top();
+    programm.data.pop();
 
     std::cout << static_cast<char>(d) << std::endl;
 }
 
-void prints::execute(spp_stack &stack)
+void prints::execute(Programm &programm)
 {
-    int d = stack.top();
+    int d = programm.data.top();
     while (d != '\0') {
-        stack.pop();
+        programm.data.pop();
         std::cout << static_cast<char>(d);
-        d = stack.top();
+        d = programm.data.top();
     }
-    stack.pop();
+    programm.data.pop();
     std::cout << std::endl;
 }
 
 
 
 // Input
-void readd::execute(spp_stack &stack)
+void readd::execute(Programm &programm)
 {
     int d;
     std::cin >> d;
-    stack.push(d);
+    programm.data.push(d);
 }
 
-void readc::execute(spp_stack &stack)
+void readc::execute(Programm &programm)
 {
     char d;
     std::cin >> d;
-    stack.push(static_cast<int>(d));
+    programm.data.push(static_cast<int>(d));
 }
 
-void reads::execute(spp_stack &stack)
+void reads::execute(Programm &programm)
 {
     std::string input;
     std::cin >> std::ws;
     std::getline(std::cin, input, '\n');
-    stack.push('\0');
+    programm.data.push('\0');
     for (auto i = input.crbegin(); i != input.crend(); i++) {
-        stack.push(static_cast<int>(*i));
+        programm.data.push(static_cast<int>(*i));
     }
 }
 
 
 // Math
 
-void add::execute(spp_stack &stack)
+void add::execute(Programm &programm)
 {
-    int a = stack.top();
-    stack.pop();
+    int a = programm.data.top();
+    programm.data.pop();
 
-    int b = stack.top();
-    stack.pop();
+    int b = programm.data.top();
+    programm.data.pop();
 
-    stack.push(b + a);
+    programm.data.push(b + a);
 }
 
-void sub::execute(spp_stack &stack)
+void sub::execute(Programm &programm)
 {
-    int a = stack.top();
-    stack.pop();
+    int a = programm.data.top();
+    programm.data.pop();
 
-    int b = stack.top();
-    stack.pop();
+    int b = programm.data.top();
+    programm.data.pop();
 
-    stack.push(b - a);
+    programm.data.push(b - a);
 }
 
-void div::execute(spp_stack &stack)
+void div::execute(Programm &programm)
 {
-    int a = stack.top();
-    stack.pop();
+    int a = programm.data.top();
+    programm.data.pop();
 
-    int b = stack.top();
-    stack.pop();
+    int b = programm.data.top();
+    programm.data.pop();
 
-    stack.push(b / a);
+    programm.data.push(b / a);
 }
 
-void mod::execute(spp_stack &stack)
+void mod::execute(Programm &programm)
 {
-    int a = stack.top();
-    stack.pop();
+    int a = programm.data.top();
+    programm.data.pop();
 
-    int b = stack.top();
-    stack.pop();
+    int b = programm.data.top();
+    programm.data.pop();
 
-    stack.push(b % a);
+    programm.data.push(b % a);
 }
 
-void mul::execute(spp_stack &stack)
+void mul::execute(Programm &programm)
 {
-    int a = stack.top();
-    stack.pop();
+    int a = programm.data.top();
+    programm.data.pop();
 
-    int b = stack.top();
-    stack.pop();
+    int b = programm.data.top();
+    programm.data.pop();
 
-    stack.push(b * a);
+    programm.data.push(b * a);
 }
 
-void cmp::execute(spp_stack &stack)
+void cmp::execute(Programm &programm)
 {
-    int a = stack.top();
-    stack.pop();
+    int a = programm.data.top();
+    programm.data.pop();
 
-    int b = stack.top();
-    stack.pop();
+    int b = programm.data.top();
+    programm.data.pop();
 
     if (a > b) {
-        stack.push(-1);
+        programm.data.push(-1);
         return;
     }
     if (a < b) {
-        stack.push(1);
+        programm.data.push(1);
         return;
     }
 
-    stack.push(0);
+    programm.data.push(0);
     return;
 }
 
