@@ -19,6 +19,19 @@ strCommand Compiler::parseCommand(const std::string &command)
     std::getline(scommand, token, ' '); // Pass the mnemonic of a command
     retval.mnemonic = token;
 
+    const auto pos = scommand.tellg();
+    std::getline(scommand, token, '\n'); // Check if arguments is string
+    if (token[0] == '\"') {
+        if (token[1] == '\"') return retval; // Empty string
+        for (int i = 1; token[i + 1] != '\"'; i++)
+        {
+            int arg = token[i];
+            retval.args.insert(retval.args.end(), arg);
+        }
+        return retval;
+    }
+    scommand.seekg(pos);
+
     while(std::getline(scommand, token, ' ')) {
         int number = std::stoi(token);
         retval.args.insert(retval.args.end(), number);
@@ -74,6 +87,13 @@ spp_command_ptr Compiler::compile(const std::string &command)
     }
     if (parsed.mnemonic == "cmp") {
         return compileRaw<command::cmp>(parsed.args);
+    }
+
+    if (parsed.mnemonic == "push") {
+        return compileRaw<command::push>(parsed.args);
+    }
+    if (parsed.mnemonic == "pop") {
+        return compileRaw<command::pop>(parsed.args);
     }
 
     return compileRaw<command::readc>(parsed.args);

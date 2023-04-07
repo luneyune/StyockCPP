@@ -16,6 +16,8 @@ void pre_compile(const char *filename, Programm &programm)
     while (input.is_readable())
     {
         std::string command = input.readString();
+        if (command.empty()) continue;
+
         spp_command_ptr compiled = compiler.compile(command);
         programm.loadCommand(std::move(compiled));
     }
@@ -29,5 +31,4 @@ int main()
     {
         programm.executeNextCommand();
     }
-    
 }

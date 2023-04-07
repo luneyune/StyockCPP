@@ -4,6 +4,7 @@
 #include <iostream>
 
 namespace command {
+
 // Output
 void printd::execute(Programm &programm)
 {
@@ -62,8 +63,8 @@ void reads::execute(Programm &programm)
 }
 
 
-// Math
 
+// Math
 void add::execute(Programm &programm)
 {
     int a = programm.data.top();
@@ -138,6 +139,22 @@ void cmp::execute(Programm &programm)
 
     programm.data.push(0);
     return;
+}
+
+
+
+// Data operation
+void push::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    for (auto iterator = args.crbegin(); iterator != args.crend(); iterator++) {
+        programm.data.push(*iterator);
+    }
+}
+
+void pop::execute(Programm &programm)
+{
+    programm.data.pop();
 }
 
 };

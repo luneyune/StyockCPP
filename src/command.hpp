@@ -13,7 +13,7 @@ struct Programm;
 // Interface class for all commands
 class iCommand
 {
-private:
+protected:
     std::vector<int> args;
 public:
     iCommand(std::vector<int> args = {}) { this->args = args; }
@@ -112,6 +112,22 @@ class cmp : public iCommand
 {
 public:
     cmp(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+// Data opertation
+
+class push : public iCommand
+{
+public:
+    push(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+class pop : public iCommand
+{
+public:
+    pop(std::vector<int> args = {}) : iCommand(args) {}
     void execute(Programm &programm) override;
 };
 
