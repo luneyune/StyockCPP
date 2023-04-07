@@ -26,7 +26,7 @@ void pre_compile(const char *filename, Programm &programm)
 int main()
 {
     Programm programm;
-    pre_compile("etc/test.txt", programm);
+    pre_compile("etc/example.txt", programm);
     while (programm.getState() == RUN)
     {
         programm.executeNextCommand();

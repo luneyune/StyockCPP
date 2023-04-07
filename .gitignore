@@ -2,4 +2,5 @@ etc/*
 obj/app/*
 bin/*
 
+!etc/example.txt
 !obj/app/.keep
