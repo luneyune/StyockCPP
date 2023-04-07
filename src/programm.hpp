@@ -9,15 +9,22 @@
 
 enum State {
     RUN,
-    END,
+    STOP,
 };
 
-struct Programm
+class Programm
 {
+public:
     spp_stack data;
-    std::vector<spp_command_ptr> programm = {};
+    State getState();
+    
     size_t current = 0;
+    void loadCommand(spp_command_ptr command);
+    void executeNextCommand();
+
+private:
     State state = RUN;
+    std::vector<spp_command_ptr> programm = {};
 };
 
 #endif

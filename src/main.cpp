@@ -17,7 +17,7 @@ void pre_compile(const char *filename, Programm &programm)
     {
         std::string command = input.readString();
         spp_command_ptr compiled = compiler.compile(command);
-        programm.programm.insert(programm.programm.cend(), std::move(compiled));
+        programm.loadCommand(std::move(compiled));
     }
 }
 
@@ -25,7 +25,9 @@ int main()
 {
     Programm programm;
     pre_compile("etc/test.txt", programm);
-    for (auto i = programm.programm.cbegin(); i != programm.programm.cend(); i++) {
-        (*i)->execute(programm);
+    while (programm.getState() == RUN)
+    {
+        programm.executeNextCommand();
     }
+    
 }
