@@ -150,7 +150,9 @@ void cmp::execute(Programm &programm)
 // Data operation
 void push::execute(Programm &programm)
 {
-    if (args.empty()) return;
+    if (args.empty()) {
+        programm.data.push(programm.data.top());
+    }
     for (auto iterator = args.crbegin(); iterator != args.crend(); iterator++) {
         programm.data.push(*iterator);
     }
@@ -187,7 +189,7 @@ void jl::execute(Programm &programm)
 {
     if (args.empty()) return;
     if (programm.data.empty()) return;
-    if (programm.data.top() != -1) {
+    if (!(programm.data.top() < 0)) {
         programm.data.pop();
         return;
     }
@@ -200,7 +202,7 @@ void jle::execute(Programm &programm)
 {
     if (args.empty()) return;
     if (programm.data.empty()) return;
-    if (programm.data.top() != -1 && programm.data.top() != 0) {
+    if (!(programm.data.top() <= 0)) {
         programm.data.pop();
         return;
     }
@@ -213,7 +215,7 @@ void jg::execute(Programm &programm)
 {
     if (args.empty()) return;
     if (programm.data.empty()) return;
-    if (programm.data.top() != 1) {
+    if (!(programm.data.top() > 0)) {
         programm.data.pop();
         return;
     }
@@ -227,7 +229,7 @@ void jge::execute(Programm &programm)
     if (args.empty()) return;
     if (programm.data.empty()) return;
 
-    if (programm.data.top() != 1 && programm.data.top() != 0) {
+    if (!(programm.data.top() >= 0)) {
         programm.data.pop();
         return;
     }

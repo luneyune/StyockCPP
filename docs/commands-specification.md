@@ -12,10 +12,10 @@ Control commands
  - jmp \<arg\> - jump to the command with index arg
  - js - jump to the command with index from top element of stack
 ---
- - jl \<arg\> - jump to the command with index arg if top of stack = -1
- - jle \<arg\> - jump to the command with index arg if top of stack -1 or 0
- - jg \<arg\> - jump to the command with index arg if top of stack = 1
- - jge \<arg\> - jump to the command with index arg if top of stack 1 or 0
+ - jl \<arg\> - jump to the command with index arg if top of stack < 0
+ - jle \<arg\> - jump to the command with index arg if top of stack <= 0
+ - jg \<arg\> - jump to the command with index arg if top of stack > 0
+ - jge \<arg\> - jump to the command with index arg if top of stack >= 0
  - je \<arg\> - jump to the command with index arg if top of stack = 0
 
 *Note: top element of stack will be removed during all conditional jumps and js*
@@ -24,7 +24,7 @@ Control commands
 
 Data operation commands
 
- - push \<arg\> - pushes number, or string, or list of numbers separated by space. String or list of numbers will be pushed in reverse order
+ - push \<arg\> - pushes number, or string, or list of numbers separated by space. String or list of numbers will be pushed in reverse order. If no arguments provided then duplicating top element.
  - pop - remove top element of stack
 
 ---
