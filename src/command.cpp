@@ -24,6 +24,7 @@ void printc::execute(Programm &programm)
 
 void prints::execute(Programm &programm)
 {
+    if (programm.data.empty()) return;
     int d = programm.data.top();
     while (d != '\0') {
         programm.data.pop();
@@ -154,6 +155,7 @@ void push::execute(Programm &programm)
 
 void pop::execute(Programm &programm)
 {
+    if (programm.data.empty()) return;
     programm.data.pop();
 }
 

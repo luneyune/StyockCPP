@@ -22,8 +22,7 @@ strCommand Compiler::parseCommand(const std::string &command)
     const auto pos = scommand.tellg();
     std::getline(scommand, token, '\n'); // Check if arguments is string
     if (token[0] == '\"') {
-        if (token[1] == '\"') return retval; // Empty string
-        for (int i = 1; token[i + 1] != '\"'; i++)
+        for (int i = 1; token[i] != '\"'; i++)
         {
             int arg = token[i];
             retval.args.insert(retval.args.end(), arg);
