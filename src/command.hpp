@@ -25,6 +25,8 @@ public:
 namespace command {
 // Command Classes
 
+
+
 // Output
 class printd : public iCommand
 {
@@ -72,6 +74,7 @@ public:
 };
 
 
+
 // Math
 class add : public iCommand
 {
@@ -115,8 +118,9 @@ public:
     void execute(Programm &programm) override;
 };
 
-// Data opertation
 
+
+// Data operation
 class push : public iCommand
 {
 public:
@@ -131,6 +135,64 @@ public:
     void execute(Programm &programm) override;
 };
 
+
+
+// Control
+class stop : public iCommand
+{
+public:
+    stop(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+class jmp : public iCommand
+{
+public:
+    jmp(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+class js : public iCommand
+{
+public:
+    js(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+
+class jl : public iCommand
+{
+public:
+    jl(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+class jle : public iCommand
+{
+public:
+    jle(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+class jg : public iCommand
+{
+public:
+    jg(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+class jge : public iCommand
+{
+public:
+    jge(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
+
+class je : public iCommand
+{
+public:
+    je(std::vector<int> args = {}) : iCommand(args) {}
+    void execute(Programm &programm) override;
+};
 
 };
 

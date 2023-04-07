@@ -27,6 +27,7 @@ strCommand Compiler::parseCommand(const std::string &command)
             int arg = token[i];
             retval.args.insert(retval.args.end(), arg);
         }
+        retval.args.insert(retval.args.end(), '\0');
         return retval;
     }
     scommand.seekg(pos);
@@ -93,6 +94,31 @@ spp_command_ptr Compiler::compile(const std::string &command)
     }
     if (parsed.mnemonic == "pop") {
         return compileRaw<command::pop>(parsed.args);
+    }
+
+    if (parsed.mnemonic == "stop") {
+        return compileRaw<command::stop>(parsed.args);
+    }
+    if (parsed.mnemonic == "js") {
+        return compileRaw<command::js>(parsed.args);
+    }
+    if (parsed.mnemonic == "jmp") {
+        return compileRaw<command::jmp>(parsed.args);
+    }
+    if (parsed.mnemonic == "jl") {
+        return compileRaw<command::jl>(parsed.args);
+    }
+    if (parsed.mnemonic == "jle") {
+        return compileRaw<command::jle>(parsed.args);
+    }
+    if (parsed.mnemonic == "jge") {
+        return compileRaw<command::jge>(parsed.args);
+    }
+    if (parsed.mnemonic == "jg") {
+        return compileRaw<command::jg>(parsed.args);
+    }
+    if (parsed.mnemonic == "je") {
+        return compileRaw<command::je>(parsed.args);
     }
 
     return compileRaw<command::readc>(parsed.args);

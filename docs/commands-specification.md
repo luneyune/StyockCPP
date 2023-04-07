@@ -5,20 +5,20 @@ I/O commands
 ---
  - printd - take a decimal number from top of stack and print into STDOUT
  - printc - take a character from top of stack and print into STDOUT
- - prints - take items from stack and print them into STDOUT until '\0'
+ - prints - take items from stack and print them into STDOUT until '\0' string will be deleted during this operation
 ---
 Control commands
  - stop - end programm
  - jmp \<arg\> - jump to the command with index arg
  - js - jump to the command with index from top element of stack
 ---
- - jl \<arg\> - jump to the command with index arg if top of stack < 0
- - jle \<arg\> - jump to the command with index arg if top of stack <= 0
+ - jl \<arg\> - jump to the command with index arg if top of stack = -1
+ - jle \<arg\> - jump to the command with index arg if top of stack -1 or 0
  - jg \<arg\> - jump to the command with index arg if top of stack = 1
- - jge \<arg\> - jump to the command with index arg if top of stack > 0
+ - jge \<arg\> - jump to the command with index arg if top of stack 1 or 0
  - je \<arg\> - jump to the command with index arg if top of stack = 0
 
- *NOTE: top of stack will be removed during this operations*
+*Note: top element of stack will be removed during all conditional jumps and js*
 
  ---
 
@@ -36,7 +36,7 @@ Math operation commands
  - div - takes 2 numbers from stack, and push result of div of this 2 numbers
  - mod - takes 2 numbers from stack, and push result of mod of this 2 numbers
  - mul - takes 2 numbers from stack, and push result of mul of this 2 numbers
- - cmp - takes 2 numbers from stack, and push result of comparing of this 2 numbers
+ - cmp - takes 2 numbers from stack, and push result of comparing of this 2 numbers, result will rewrite only last pushed number
 
 *Note: numbers order defined by input order from stack*
 

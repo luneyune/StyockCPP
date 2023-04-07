@@ -8,16 +8,16 @@ namespace command {
 // Output
 void printd::execute(Programm &programm)
 {
+    if (programm.data.empty()) return;
     int d = programm.data.top();
-    programm.data.pop();
 
     std::cout << d << std::endl;
 }
 
 void printc::execute(Programm &programm)
 {
+    if (programm.data.empty()) return;
     int d = programm.data.top();
-    programm.data.pop();
 
     std::cout << static_cast<char>(d) << std::endl;
 }
@@ -34,8 +34,6 @@ void prints::execute(Programm &programm)
     programm.data.pop();
     std::cout << std::endl;
 }
-
-
 
 // Input
 void readd::execute(Programm &programm)
@@ -68,6 +66,7 @@ void reads::execute(Programm &programm)
 // Math
 void add::execute(Programm &programm)
 {
+    if (programm.data.size() < 2) return;
     int a = programm.data.top();
     programm.data.pop();
 
@@ -79,6 +78,7 @@ void add::execute(Programm &programm)
 
 void sub::execute(Programm &programm)
 {
+    if (programm.data.size() < 2) return;
     int a = programm.data.top();
     programm.data.pop();
 
@@ -90,6 +90,7 @@ void sub::execute(Programm &programm)
 
 void div::execute(Programm &programm)
 {
+    if (programm.data.size() < 2) return;
     int a = programm.data.top();
     programm.data.pop();
 
@@ -101,6 +102,7 @@ void div::execute(Programm &programm)
 
 void mod::execute(Programm &programm)
 {
+    if (programm.data.size() < 2) return;
     int a = programm.data.top();
     programm.data.pop();
 
@@ -112,6 +114,7 @@ void mod::execute(Programm &programm)
 
 void mul::execute(Programm &programm)
 {
+    if (programm.data.size() < 2) return;
     int a = programm.data.top();
     programm.data.pop();
 
@@ -123,17 +126,17 @@ void mul::execute(Programm &programm)
 
 void cmp::execute(Programm &programm)
 {
+    if (programm.data.size() < 2) return;
     int a = programm.data.top();
     programm.data.pop();
 
     int b = programm.data.top();
-    programm.data.pop();
 
-    if (a > b) {
+    if (a < b) {
         programm.data.push(-1);
         return;
     }
-    if (a < b) {
+    if (a > b) {
         programm.data.push(1);
         return;
     }
@@ -157,6 +160,94 @@ void pop::execute(Programm &programm)
 {
     if (programm.data.empty()) return;
     programm.data.pop();
+}
+
+
+
+// Control
+void stop::execute(Programm &programm)
+{
+    programm.setState(STOP);
+}
+
+void jmp::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    programm.current = args.at(0) - 1;
+}
+
+void js::execute(Programm &programm)
+{
+    if (programm.data.empty()) return;
+    programm.current = programm.data.top() - 1;
+}
+
+
+void jl::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    if (programm.data.empty()) return;
+    if (programm.data.top() != -1) {
+        programm.data.pop();
+        return;
+    }
+       
+    programm.data.pop();
+    programm.current = args.at(0) - 1;
+}
+
+void jle::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    if (programm.data.empty()) return;
+    if (programm.data.top() != -1 && programm.data.top() != 0) {
+        programm.data.pop();
+        return;
+    }
+       
+    programm.data.pop();
+    programm.current = args.at(0) - 1;
+}
+
+void jg::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    if (programm.data.empty()) return;
+    if (programm.data.top() != 1) {
+        programm.data.pop();
+        return;
+    }
+       
+    programm.data.pop();
+    programm.current = args.at(0) - 1;
+}
+
+void jge::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    if (programm.data.empty()) return;
+
+    if (programm.data.top() != 1 && programm.data.top() != 0) {
+        programm.data.pop();
+        return;
+    }
+       
+    programm.data.pop();
+    programm.current = args.at(0) - 1;
+}
+
+void je::execute(Programm &programm)
+{
+    if (args.empty()) return;
+    if (programm.data.empty()) return;
+
+    if (programm.data.top() != 0) {
+        programm.data.pop();
+        return;
+    }
+       
+    programm.data.pop();
+    programm.current = args.at(0) - 1;
 }
 
 };
