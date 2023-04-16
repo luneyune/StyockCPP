@@ -1,5 +1,23 @@
 #include "programm.hpp"
 
+#include "input.hpp"
+#include "compiler.hpp"
+
+Programm::Programm(const char *filename)
+{
+    Input &input = Input::getInstance(filename);
+    Compiler &compiler = Compiler::getInstance();
+
+    while (input.is_readable())
+    {
+        std::string command = input.readString();
+        if (command.empty()) continue;
+
+        spp_command_ptr compiled = compiler.compile(command);
+        loadCommand(std::move(compiled));
+    }
+}
+
 State Programm::getState()
 {
     return state;

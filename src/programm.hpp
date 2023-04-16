@@ -15,15 +15,17 @@ enum State {
 class Programm
 {
 public:
+    Programm(const char *filename);
+
     spp_stack data;
     State getState();
     void setState(State state);
     
     size_t current = 0;
-    void loadCommand(spp_command_ptr command);
     void executeNextCommand();
 
 private:
+    void loadCommand(spp_command_ptr command);
     State state = RUN;
     std::vector<spp_command_ptr> programm = {};
 };

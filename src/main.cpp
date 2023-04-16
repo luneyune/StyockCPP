@@ -8,25 +8,9 @@
 #include "compiler.hpp"
 #include "programm.hpp"
 
-void pre_compile(const char *filename, Programm &programm)
-{
-    Input &input = Input::getInstance(filename);
-    Compiler &compiler = Compiler::getInstance();
-
-    while (input.is_readable())
-    {
-        std::string command = input.readString();
-        if (command.empty()) continue;
-
-        spp_command_ptr compiled = compiler.compile(command);
-        programm.loadCommand(std::move(compiled));
-    }
-}
-
 int main()
 {
-    Programm programm;
-    pre_compile("etc/example.txt", programm);
+    Programm programm("etc/example.txt");
     while (programm.getState() == RUN)
     {
         programm.executeNextCommand();
