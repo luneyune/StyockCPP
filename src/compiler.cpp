@@ -4,6 +4,37 @@
 #include "command.hpp"
 #include "types.hpp"
 
+Compiler::Compiler()
+{
+    compile_map.insert({"printc", [](std::vector<int> args) { return std::make_unique<command::printc>(args); }});
+    compile_map.insert({"printd", [](std::vector<int> args) { return std::make_unique<command::printd>(args); }});
+    compile_map.insert({"prints", [](std::vector<int> args) { return std::make_unique<command::prints>(args); }});
+
+    compile_map.insert({"reads", [](std::vector<int> args) { return std::make_unique<command::reads>(args); }});
+    compile_map.insert({"readd", [](std::vector<int> args) { return std::make_unique<command::readd>(args); }});
+    compile_map.insert({"readc", [](std::vector<int> args) { return std::make_unique<command::readc>(args); }});
+
+    compile_map.insert({"add", [](std::vector<int> args) { return std::make_unique<command::add>(args); }});
+    compile_map.insert({"sub", [](std::vector<int> args) { return std::make_unique<command::sub>(args); }});
+    compile_map.insert({"mul", [](std::vector<int> args) { return std::make_unique<command::mul>(args); }});
+    compile_map.insert({"div", [](std::vector<int> args) { return std::make_unique<command::div>(args); }});
+    compile_map.insert({"mod", [](std::vector<int> args) { return std::make_unique<command::mod>(args); }});
+    compile_map.insert({"cmp", [](std::vector<int> args) { return std::make_unique<command::cmp>(args); }});
+
+    compile_map.insert({"push", [](std::vector<int> args) { return std::make_unique<command::push>(args); }});
+    compile_map.insert({"pop", [](std::vector<int> args) { return std::make_unique<command::pop>(args); }});
+
+    compile_map.insert({"stop", [](std::vector<int> args) { return std::make_unique<command::stop>(args); }});
+    compile_map.insert({"jmp", [](std::vector<int> args) { return std::make_unique<command::jmp>(args); }});
+    compile_map.insert({"js", [](std::vector<int> args) { return std::make_unique<command::js>(args); }});
+
+    compile_map.insert({"jle", [](std::vector<int> args) { return std::make_unique<command::jle>(args); }});
+    compile_map.insert({"jge", [](std::vector<int> args) { return std::make_unique<command::jge>(args); }});
+    compile_map.insert({"jl", [](std::vector<int> args) { return std::make_unique<command::jl>(args); }});
+    compile_map.insert({"jg", [](std::vector<int> args) { return std::make_unique<command::jg>(args); }});
+    compile_map.insert({"je", [](std::vector<int> args) { return std::make_unique<command::je>(args); }});
+}
+
 Compiler& Compiler::getInstance()
 {
     static Compiler compiler;
@@ -40,88 +71,16 @@ strCommand Compiler::parseCommand(const std::string &command)
     return retval;
 }
 
-template <typename T>
-spp_command_ptr Compiler::compileRaw(std::vector<int> args)
-{
-    return std::make_unique<T>(args);
-}
-
-
 spp_command_ptr Compiler::compile(const std::string &command)
 {
     strCommand parsed = parseCommand(command);
-    if (parsed.mnemonic == "printd") {
-        return compileRaw<command::printd>(parsed.args);
-    }
-    if (parsed.mnemonic == "printc") {
-        return compileRaw<command::printc>(parsed.args);
-    }
-    if (parsed.mnemonic == "prints") {
-        return compileRaw<command::prints>(parsed.args);
+
+    if (compile_map.find(parsed.mnemonic) != compile_map.cend()) {
+        return compile_map[parsed.mnemonic](parsed.args);
     }
 
-    if (parsed.mnemonic == "readd") {
-        return compileRaw<command::readd>(parsed.args);
-    }
-    if (parsed.mnemonic == "readc") {
-        return compileRaw<command::readc>(parsed.args);
-    }
-    if (parsed.mnemonic == "reads") {
-        return compileRaw<command::reads>(parsed.args);
-    }
+    return compile_map["readc"](parsed.args);
 
-    if (parsed.mnemonic == "add") {
-        return compileRaw<command::add>(parsed.args);
-    }
-    if (parsed.mnemonic == "sub") {
-        return compileRaw<command::sub>(parsed.args);
-    }
-    if (parsed.mnemonic == "div") {
-        return compileRaw<command::div>(parsed.args);
-    }
-    if (parsed.mnemonic == "mod") {
-        return compileRaw<command::mod>(parsed.args);
-    }
-    if (parsed.mnemonic == "mul") {
-        return compileRaw<command::mul>(parsed.args);
-    }
-    if (parsed.mnemonic == "cmp") {
-        return compileRaw<command::cmp>(parsed.args);
-    }
-
-    if (parsed.mnemonic == "push") {
-        return compileRaw<command::push>(parsed.args);
-    }
-    if (parsed.mnemonic == "pop") {
-        return compileRaw<command::pop>(parsed.args);
-    }
-
-    if (parsed.mnemonic == "stop") {
-        return compileRaw<command::stop>(parsed.args);
-    }
-    if (parsed.mnemonic == "js") {
-        return compileRaw<command::js>(parsed.args);
-    }
-    if (parsed.mnemonic == "jmp") {
-        return compileRaw<command::jmp>(parsed.args);
-    }
-    if (parsed.mnemonic == "jl") {
-        return compileRaw<command::jl>(parsed.args);
-    }
-    if (parsed.mnemonic == "jle") {
-        return compileRaw<command::jle>(parsed.args);
-    }
-    if (parsed.mnemonic == "jge") {
-        return compileRaw<command::jge>(parsed.args);
-    }
-    if (parsed.mnemonic == "jg") {
-        return compileRaw<command::jg>(parsed.args);
-    }
-    if (parsed.mnemonic == "je") {
-        return compileRaw<command::je>(parsed.args);
-    }
-
-    return compileRaw<command::readc>(parsed.args);
 }
 
 

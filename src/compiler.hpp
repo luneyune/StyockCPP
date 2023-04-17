@@ -2,7 +2,6 @@
 #define STYOCKCPP_COMPILER_SRC_COMPILER_HPP_
 
 #include <memory>
-#include <map>
 #include "command.hpp"
 #include "types.hpp"
 
@@ -15,12 +14,10 @@ struct strCommand
 class Compiler
 {
 private:
+    spp_compiler compile_map = {};
     strCommand parseCommand(const std::string &command);
-    
-    template <typename T>
-    spp_command_ptr compileRaw(std::vector<int> args = {});
 
-    Compiler() {}
+    Compiler();
     Compiler(Compiler&) {}
 public:
     ~Compiler() {}
