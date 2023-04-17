@@ -21,9 +21,9 @@ bool Input::is_readable()
 
 std::string Input::readString()
 {
-    char buffer[120];
-    fileStream.getline(buffer, 120);
-    std::string line(buffer);
+    std::string line;
+    std::getline(fileStream, line, '\n');
+
     return line;
 }
 
