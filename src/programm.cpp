@@ -37,7 +37,7 @@ void Programm::executeNextCommand()
 {
     if (current >= programm.size())
     {
-        state = STOP;
+        state = State::STOP;
         return;
     }
     

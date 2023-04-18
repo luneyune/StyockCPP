@@ -7,7 +7,7 @@
 
 #include "command.hpp"
 
-enum State {
+enum class State {
     RUN,
     STOP,
 };
@@ -26,7 +26,7 @@ public:
 
 private:
     void loadCommand(spp_command_ptr command);
-    State state = RUN;
+    State state = State::RUN;
     std::vector<spp_command_ptr> programm = {};
 };
 
