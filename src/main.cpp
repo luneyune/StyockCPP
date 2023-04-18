@@ -11,8 +11,5 @@
 int main()
 {
     Programm programm("etc/example.txt");
-    while (programm.getState() == RUN)
-    {
-        programm.executeNextCommand();
-    }
+    while (programm.executeNextCommand());
 }

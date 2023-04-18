@@ -169,7 +169,7 @@ void pop::execute(Programm &programm)
 // Control
 void stop::execute(Programm &programm)
 {
-    programm.setState(State::STOP);
+    programm.state = State::STOP;
 }
 
 void jmp::execute(Programm &programm)

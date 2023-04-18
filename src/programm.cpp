@@ -23,24 +23,20 @@ State Programm::getState()
     return state;
 }
 
-void Programm::setState(State state)
-{
-    this->state = state;
-}
-
 void Programm::loadCommand(spp_command_ptr command)
 {
     programm.insert(programm.cend(), std::move(command));
 }
 
-void Programm::executeNextCommand()
+bool Programm::executeNextCommand()
 {
     if (current >= programm.size())
     {
         state = State::STOP;
-        return;
+        return state == State::RUN;
     }
     
     programm.at(current)->execute(*this);
     current++;
+    return state == State::RUN;
 }

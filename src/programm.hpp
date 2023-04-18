@@ -19,15 +19,17 @@ public:
 
     spp_stack data;
     State getState();
-    void setState(State state);
     
     size_t current = 0;
-    void executeNextCommand();
+    bool executeNextCommand();
 
 private:
     void loadCommand(spp_command_ptr command);
     State state = State::RUN;
     std::vector<spp_command_ptr> programm = {};
+
+
+    friend class command::stop;
 };
 
 #endif
